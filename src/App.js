@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 
 function App() {
     return (
-        <div className="w-screen h-screen bg-slate-700">
+        <div className="p-safe w-screen min-h-screen bg-slate-700">
             <Header />
             <Map />
         </div>

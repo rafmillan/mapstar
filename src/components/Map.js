@@ -57,11 +57,13 @@ export default function Map() {
     // }
     console.log(data[answer].country)
     return (
-        <div>
-            <div className="flex justify-center text-4xl tracking-wide font-semibold text-white -mt-3 mb-2">
-                High Score: {hiScore}
+        <div className="">
+            <div className="flex justify-center text-xl tracking-wide font-semibold text-white -mt-3 mb-2">
+                high score: {hiScore}
             </div>
-            <MapViewer imageId={data[answer].imageId} />
+            <div className="">
+                <MapViewer imageId={data[answer].imageId} />
+            </div>
             {/* <div className="flex justify-between">
                 <button className="w-1/2 py-1 mx-1 my-2 text-white rounded border bg-slate-800 hover:bg-slate-900"
                     onClick={prevLocation}
