@@ -1,6 +1,5 @@
 import React from "react";
 import { Viewer } from "mapillary-js";
-import { useState } from "react";
 import PropTypes from 'prop-types';
 
 export default function MapViewer(props) {
@@ -30,53 +29,17 @@ export default function MapViewer(props) {
         }
     }
 
-    // logic to select location
-    const [index, setIndex] = useState(0);
-    const nextLocation = () => {
-        if (index < props.data.length-1) {
-            setIndex(index + 1);
-        }
-    }
-
-    const  prevLocation = () => {
-        if (index > 0) {
-            setIndex(index - 1);
-        }
-    }
-    console.log(index)
-
     return (
         <div>
             <ViewerComponent
                 accessToken="MLY|6051789021569153|d33d8687e4ea07348dedf043ab9e3ccb"
-                imageId={props.data[index].imageId}
+                imageId={props.imageId}
                 style={{ width: "100vw", height: "55vh" }}
             />
-            <div className="flex justify-between">
-                <button className="w-1/2 px-3 mx-1 my-2 text-white rounded border bg-slate-800 hover:bg-slate-900" 
-                    onClick={prevLocation} 
-                    disabled={index === 0}
-                >
-                    prev
-                </button>
-                <button className="w-1/2 py-3 mx-1 my-2 text-white rounded border bg-slate-800 hover:bg-slate-900" 
-                    onClick={nextLocation} 
-                    disabled={index === props.data.length-1}
-                >
-                    next
-                </button>
-            </div>
         </div>
     );
 }
 // id,city,country,imageId
 MapViewer.propTypes = {
-    maxValue: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        city: PropTypes.string.isRequired,
-        country: PropTypes.string.isRequired,
-        imageId: PropTypes.number.isRequired
-      })
-    ).isRequired,
+    imageId: PropTypes.string.isRequired,
 };
