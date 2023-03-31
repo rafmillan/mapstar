@@ -23,7 +23,7 @@ const MultipleChoice  = ({ data, list, answer, onButtonClick}) => {
                     className="flex justify-center py-6 text-lg text-white rounded  bg-slate-800 active:bg-slate-900"
                     key={index}
                     onClick={() => handleClick(data[item].id)}>
-                  {data[item].country}        
+                  {data[item].city}, {data[item].country}        
                 </button>
             ))}
         </div>
