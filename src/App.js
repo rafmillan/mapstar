@@ -77,7 +77,7 @@ function App() {
     // }
     //            {//}
     return (
-        <div className="p-safe w-screen min-h-screen bg-slate-700">
+        <div className="p-safe w-screen min-h-screen bg-raisin text-lavblush">
             <Header hiScore={hiScore}/>
             <Popup score={hiScore} turn={turn} onButtonClick={restart}/>
             <Map data={data} answer={answer}/>

@@ -47,15 +47,15 @@ export default function Popup({ score, turn, onButtonClick}) {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full  max-w-sm transform overflow-hidden rounded-2xl bg-slate-700 p-10 text-center align-middle shadow-3xl transition-all">
+                                <Dialog.Panel className="w-full  max-w-sm transform overflow-hidden rounded-2xl bg-indigodark p-10 text-center align-middle shadow-3xl transition-all">
                                     <Dialog.Title
-                                        as="h3"
-                                        className="text-2xl font-medium leading-6 text-white"
+                                        as="h3" 
+                                        className="text-4xl font-semibold tracking-wider leading-6 text-litered"
                                     >
                                         Wrong!
                                     </Dialog.Title>
-                                    <div className="mt-2">
-                                        <p className="text-md text-gray-900">
+                                    <div className="mt-3">
+                                        <p className="text-xl tracking-wide text-lavblush">
                                             streak: {score}
                                         </p>
                                     </div>
@@ -63,7 +63,7 @@ export default function Popup({ score, turn, onButtonClick}) {
                                     <div className="mt-4">
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-slate-200 px-4 py-2 text-sm font-medium  text-gray-900 active:bg-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            className="text-md inline-flex justify-center rounded-md border border-transparent bg-lavblush px-4 py-2 font-medium  text-gray-900 active:bg-lavblush focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={closeModal}
                                         >
                                             Got it, thanks!
