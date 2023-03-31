@@ -15,6 +15,7 @@ export default function MapViewer(props) {
                 accessToken: this.props.accessToken,
                 container: this.containerRef.current,
                 imageId: this.props.imageId,
+                component: {cover: false},
             });
         }
 
@@ -30,11 +31,11 @@ export default function MapViewer(props) {
     }
 
     return (
-        <div>
+        <div className="rounded-md">
             <ViewerComponent
                 accessToken="MLY|6051789021569153|d33d8687e4ea07348dedf043ab9e3ccb"
                 imageId={props.imageId}
-                style={{ width: "100vw", height: "55vh" }}
+                style={{ position:"relative", width: "100%", height: "55vh" }}
             />
         </div>
     );

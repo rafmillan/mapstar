@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Header({hiScore}) {
     return (
-        <div>
-            <div className="text-3xl text-white font-semibold tracking-wide text-center py-4">
+        <div className="flex flex-col-2 justify-between pb-2 tracking-wider">
+            <div className="px-5 text-3xl text-white font-semibold">
                 mapstar
             </div>
-                <div className="flex justify-center text-xl tracking-wide font-semibold text-white -mt-3 mb-2">
+            <div className="px-5 text-3xl text-white font-semibol">
                 streak: {hiScore}
             </div>
         </div>
