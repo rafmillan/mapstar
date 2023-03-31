@@ -2,8 +2,8 @@ import React from "react"
 
 export default function Footer() {
 	return (
-        <div className="basis-1/4 flex flex-col items-center justify-center mt-auto pb-" >
+        <footer className="text-white text-xs bottom-0 flex fixed allign-center left-1/2 transform -translate-x-1/2" >
             (C) Raf Millan - 2023
-        </div>
+        </footer>
 	)
 }
