@@ -17,7 +17,7 @@ const MultipleChoice  = ({ data, list, answer, onButtonClick}) => {
     }
 
     return (
-        <div className="h-60 grid grid-cols-2 gap-1 py-1 px-1">
+        <div className="h-60 grid grid-cols-2 gap-1 p-1">
             {list.map((item, index) => (
                 <button 
                     className="flex items-center justify-center text-xl rounded bg-indigo active:bg-indigodark"

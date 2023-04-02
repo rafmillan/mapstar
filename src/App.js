@@ -82,7 +82,6 @@ function App() {
             <Popup score={hiScore} turn={turn} onButtonClick={restart}/>
             <Map data={data} answer={answer}/>
             <MultipleChoice data={data} list={choices} answer={answer} onButtonClick={userInput}/>
-            <Footer />
         </div>
     );
 }

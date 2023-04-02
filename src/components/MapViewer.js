@@ -35,7 +35,7 @@ export default function MapViewer(props) {
             <ViewerComponent
                 accessToken="MLY|6051789021569153|d33d8687e4ea07348dedf043ab9e3ccb"
                 imageId={props.imageId}
-                style={{ position:"relative", width: "100%", height: "55vh" }}
+                style={{ position:"relative", width: "100%", height: "50vh" }}
             />
         </div>
     );
