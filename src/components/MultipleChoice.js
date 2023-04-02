@@ -17,10 +17,10 @@ const MultipleChoice  = ({ data, list, answer, onButtonClick}) => {
     }
 
     return (
-        <div className="h-60 grid grid-cols-2 gap-1 p-1">
+        <div className="min-h-max h-60 grid grid-cols-2 gap-1 mt-1 p-1">
             {list.map((item, index) => (
                 <button 
-                    className="flex items-center justify-center text-xl rounded bg-indigo active:bg-indigodark"
+                    className="h-50vw flex items-center justify-center text-xl rounded bg-indigo active:bg-indigodark"
                     key={index}
                     onClick={() => handleClick(data[item].id)}>
                   {data[item].city}, {data[item].country}        
