@@ -40,49 +40,40 @@ function App() {
     console.log(data[answer].country)
     const [hiScore, setHiScore] = useState(0);
     const [turn, setTurn] = useState(1);
+    const [history, setHistory] = useState([]);
 
     function restart() {
         setHiScore(0)
         setTurn(1)
+        setHistory([])
         choices = getChoices(data.length, 4)
         answer  = choices[Math.floor(Math.random() * (choices.length))]
     }
 
     function userInput(id) {
+        setHistory([...history, answer])
         let answerId = data[answer].id
         if(id === answerId) {
             setHiScore(hiScore + 1)
             setTurn(turn + 1)
             choices = getChoices(data.length, 4)
             answer  = choices[Math.floor(Math.random() * (choices.length))]
+            while(history.includes(answer)) {
+                answer  = choices[Math.floor(Math.random() * (choices.length))]
+            }
+
         } else {
             setTurn(0)
         }
     }
 
-    // const nextLocation = () => {
-    //     setHiScore(hiScore + 1)
-    //     if (index < data.length - 1) {
-    //         setIndex(index + 1);
-    //     }
-    // }
-
-    // const prevLocation = () => {
-    //     if (index > 0) {
-    //         setIndex(index - 1);
-    //     }
-    //     if (hiScore > 0) {
-    //         setHiScore(hiScore - 1)
-    //     }
-    // }
-    //            {//}
+    console.log(history)
     return (
         <div className="p-safe w-screen min-h-screen bg-raisin text-lavblush">
             <Header hiScore={hiScore}/>
             <Popup score={hiScore} turn={turn} onButtonClick={restart}/>
             <Map data={data} answer={answer}/>
             <MultipleChoice data={data} list={choices} answer={answer} onButtonClick={userInput}/>
-            <Footer />
         </div>
     );
 }
