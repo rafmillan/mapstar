@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import Popup from "./components/Popup";
 import MultipleChoice from "./components/MultipleChoice";
 import { CSV } from "./locations.js"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function parseCsv(csvData) {
     const rows = csvData.split('\n');
@@ -37,14 +37,15 @@ let answer = choices[Math.floor(Math.random() * (choices.length))]
 function App() {
     // logic to select location
     //const [index, setIndex] = useState(0);
-    const [hiScore, setHiScore] = useState(0);
+    const [streak, setStreak] = useState(0);
     const [turn, setTurn] = useState(1);
     const [history, setHistory] = useState([]);
     const [scores, setScores] = useState([]);
+    const [hiScore, setHiScore] = useState(0);
 
     function restart() {
-        setScores([...scores, hiScore])
-        setHiScore(0)
+        setScores([...scores, streak])
+        setStreak(0)
         setTurn(1)
         setHistory([])
         choices = getChoices(data.length, 4)
@@ -55,7 +56,7 @@ function App() {
         setHistory([...history, answer])
         let answerId = data[answer].id
         if (id === answerId) {
-            setHiScore(hiScore + 1)
+            setStreak(streak + 1)
             setTurn(turn + 1)
             choices = getChoices(data.length, 4)
             answer = choices[Math.floor(Math.random() * (choices.length))]
@@ -71,10 +72,28 @@ function App() {
             setTurn(0)
         }
     }
+    useEffect(() => {
+        const data = window.localStorage.getItem("HIGH_SCORE");
+        if (data !== null) {
+            setHiScore(JSON.parse(data))
+        }
+    },[])
+
+    useEffect(() => {
+        if (scores.length > 0) {
+            var ath = Math.max(...scores)
+            console.log(ath)
+            if (ath > hiScore) {
+                setHiScore(ath)
+                window.localStorage.setItem("HIGH_SCORE", JSON.stringify(ath))
+            }
+        }
+    },[scores])
+    
     return (
         <div className="p-safe w-screen min-h-screen bg-raisin text-lavblush">
-            <Header hiScore={hiScore} scores={scores}/>
-            <Popup score={hiScore} turn={turn} onButtonClick={restart} />
+            <Header streak={streak} hiScore={hiScore}/>
+            <Popup score={streak} turn={turn} onButtonClick={restart} />
             <Map data={data} answer={answer} />
             <MultipleChoice data={data} list={choices} answer={answer} onButtonClick={userInput} />
             <Footer />

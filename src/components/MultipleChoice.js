@@ -20,7 +20,7 @@ const MultipleChoice  = ({ data, list, answer, onButtonClick}) => {
         <div className="min-h-max h-60 grid grid-cols-2 gap-1 mt-1 p-1">
             {list.map((item, index) => (
                 <button 
-                    className="h-50vw flex items-center justify-center text-xl rounded bg-indigo active:bg-indigodark"
+                    className="h-50vw flex items-center justify-center text-xl font-semibold rounded bg-red-500 active:bg-red-700"
                     key={index}
                     onClick={() => handleClick(data[item].id)}>
                   {data[item].city}, {data[item].country}        

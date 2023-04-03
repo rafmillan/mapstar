@@ -74,7 +74,7 @@ export default function Modal({currentStreak, allTimeHigh}) {
                             leaveFrom= 'translate-y-0'
                             leaveTo= 'translate-y-full'
                         >
-                            <div className="h-screen inline-block w-screen p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-bg-gray shadow-xl rounded-xl">
+                            <div className="h-screen inline-block w-screen p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-raisin shadow-xl rounded-xl">
                                 <div className="-mt-3 -mx-3 -mb-3 flex justify-end">
                                     <button
                                         type="button"
