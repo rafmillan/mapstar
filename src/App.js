@@ -36,7 +36,6 @@ let answer = choices[Math.floor(Math.random() * (choices.length))]
 
 function App() {
     // logic to select location
-    //const [index, setIndex] = useState(0);
     const [streak, setStreak] = useState(0);
     const [turn, setTurn] = useState(1);
     const [history, setHistory] = useState([]);
@@ -73,7 +72,7 @@ function App() {
         }
     }
     useEffect(() => {
-        const data = window.localStorage.getItem("HIGH_SCORE");
+        const data = window.localStorage.getItem("MAPSTAR_HIGH_SCORE");
         if (data !== null) {
             setHiScore(JSON.parse(data))
         }
@@ -85,7 +84,7 @@ function App() {
             console.log(ath)
             if (ath > hiScore) {
                 setHiScore(ath)
-                window.localStorage.setItem("HIGH_SCORE", JSON.stringify(ath))
+                window.localStorage.setItem("MAPSTAR_HIGH_SCORE", JSON.stringify(ath))
             }
         }
     },[scores])

@@ -1,46 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import { Viewer } from "mapillary-js";
 import PropTypes from 'prop-types';
 
-export default function MapViewer(props) {
-    // Create the Viewer Component
-    class ViewerComponent extends React.Component {
-        constructor(props) {
-            super(props);
-            this.containerRef = React.createRef();
-        }
+class ViewerComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.containerRef = React.createRef();
+    }
 
-        componentDidMount() {
+    componentDidMount() {
+        if (this.containerRef.current) {
             this.viewer = new Viewer({
                 accessToken: this.props.accessToken,
                 container: this.containerRef.current,
                 imageId: this.props.imageId,
-                component: {cover: false},
+                component: { cover: false },
             });
         }
+    }
 
-        componentWillUnmount() {
-            if (this.viewer) {
-                this.viewer.remove();
-            }
+    componentWillUnmount() {
+        if (this.viewer) {
+            this.viewer.remove();
         }
+    }
 
-        render() {
-            return <div ref={this.containerRef} style={this.props.style} />;
-        }
+    render() {
+        return <div ref={this.containerRef} style={this.props.style} />;
+    }
+}
+
+export default function MapViewer(props) {
+    const { imageId } = props;
+
+    if (!imageId) {
+        return <div>Error: No image ID provided</div>;
     }
 
     return (
         <div className="rounded-md">
             <ViewerComponent
-                accessToken="MLY|6051789021569153|d33d8687e4ea07348dedf043ab9e3ccb"
-                imageId={props.imageId}
-                style={{ position:"relative", width: "100%", height: "50vh" }}
+                key={imageId}
+                accessToken={process.env.REACT_APP_MAPILLARY_ACCESS_TOKEN}
+                imageId={imageId}
+                style={{ position: "relative", width: "100%", height: "50vh" }}
             />
         </div>
     );
 }
-// id,city,country,imageId
+
 MapViewer.propTypes = {
     imageId: PropTypes.string.isRequired,
 };
