@@ -84,7 +84,7 @@ function App() {
             console.log(ath)
             if (ath > hiScore) {
                 setHiScore(ath)
-                window.localStorage.setItem("HIGH_SCORE", JSON.stringify(ath))
+                window.localStorage.setItem("MAPSTAR_HIGH_SCORE", JSON.stringify(ath))
             }
         }
     },[scores])
