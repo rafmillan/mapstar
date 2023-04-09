@@ -36,63 +36,105 @@ let answer = choices[Math.floor(Math.random() * (choices.length))]
 
 function App() {
     // logic to select location
-    const [streak, setStreak] = useState(0);
-    const [turn, setTurn] = useState(1);
-    const [history, setHistory] = useState([]);
-    const [scores, setScores] = useState([]);
-    const [hiScore, setHiScore] = useState(0);
+    const [gameState, setGameState] = useState(
+        {
+            hiScore: 0,
+            streak: 0,
+            turn: 1,
+            history: [],
+            scores: [],
+        }
+    )
 
     function restart() {
-        setScores([...scores, streak])
-        setStreak(0)
-        setTurn(1)
-        setHistory([])
+        setGameState(prevGameState => (
+            {
+                ...prevGameState,
+                streak: 0,
+                turn: 1,
+                scores: [...prevGameState.scores, prevGameState.streak],
+                history: [],
+            }
+        ))
+
         choices = getChoices(data.length, 4)
         answer = choices[Math.floor(Math.random() * (choices.length))]
     }
 
     function userInput(id) {
-        setHistory([...history, answer])
+        setGameState(prevGameState => (
+            {
+                ...prevGameState,
+                history: [...prevGameState.history, answer],
+            }
+        ))
+
         let answerId = data[answer].id
         if (id === answerId) {
-            setStreak(streak + 1)
-            setTurn(turn + 1)
+            setGameState(prevGameState => (
+                {
+                    ...prevGameState,
+                    streak: prevGameState.streak + 1,
+                    turn: prevGameState.turn + 1,
+                }
+            ))
+
             choices = getChoices(data.length, 4)
             answer = choices[Math.floor(Math.random() * (choices.length))]
-            while (history.includes(answer)) {
-                if (history.length === data.length) {
-                    setHistory([])
+            while (gameState.history.includes(answer)) {
+                if (gameState.history.length === data.length) {
+                    setGameState(prevGameState => (
+                        {
+                            ...prevGameState,
+                            history: [],
+                        }
+                    ))
                     break
                 }
                 answer = choices[Math.floor(Math.random() * (choices.length))]
             }
 
         } else {
-            setTurn(0)
+            setGameState(prevGameState => (
+                {
+                    ...prevGameState,
+                    turn: 0,
+                }
+            ))
         }
+        console.log(gameState.history)
     }
     useEffect(() => {
         const data = window.localStorage.getItem("MAPSTAR_HIGH_SCORE");
         if (data !== null) {
-            setHiScore(JSON.parse(data))
+            setGameState(prevGameState => (
+                {
+                    ...prevGameState,
+                    hiScore: JSON.parse(data),
+                }
+            ))
         }
     },[])
 
     useEffect(() => {
-        if (scores.length > 0) {
-            var ath = Math.max(...scores)
-            console.log(ath)
-            if (ath > hiScore) {
-                setHiScore(ath)
+        if (gameState.scores.length > 0) {
+            var ath = Math.max(...gameState.scores)
+            if (ath > gameState.hiScore) {
+                setGameState(prevGameState => (
+                    {
+                        ...prevGameState,
+                        hiScore: ath,
+                    }
+                ))
                 window.localStorage.setItem("MAPSTAR_HIGH_SCORE", JSON.stringify(ath))
             }
         }
-    },[scores])
+    },[gameState])
     
     return (
         <div className="p-safe w-screen min-h-screen bg-raisin text-lavblush">
-            <Header streak={streak} hiScore={hiScore}/>
-            <Popup score={streak} turn={turn} onButtonClick={restart} />
+            <Header streak={gameState.streak} hiScore={gameState.hiScore}/>
+            <Popup score={gameState.streak} turn={gameState.turn} onButtonClick={restart} />
             <Map data={data} answer={answer} />
             <MultipleChoice data={data} list={choices} answer={answer} onButtonClick={userInput} />
             <Footer />

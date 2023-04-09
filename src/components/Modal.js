@@ -1,5 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import Settings from "./Settings";
+import Stats from "./Stats";
 
 export default function Modal({currentStreak, allTimeHigh}) {
     let [isOpen, setIsOpen] = useState(false);
@@ -93,26 +95,15 @@ export default function Modal({currentStreak, allTimeHigh}) {
                                 >
                                     statistics
                                 </Dialog.Title>
-                                <div className="">
-                                    <div className="grid grid-cols-2 text-lavblush py-5">
-                                        <div className="grid grid-rows-2">
-                                            <div className="text-6xl flex justify-center">
-                                                {currentStreak}
-                                            </div>
-                                            <div className="text-md flex justify-center">
-                                                current streak
-                                            </div>
-                                        </div>
-                                        <div className="grid grid-rows-2">
-                                            <div className="text-6xl flex justify-center">
-                                                {allTimeHigh}
-                                            </div>
-                                            <div className="text-md flex justify-center">
-                                                all time high
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <Stats currentStreak={currentStreak} allTimeHigh={allTimeHigh}/>
+                                <Dialog.Title
+                                    as="h3"
+                                    className="text-2xl font-medium text-lavblush"
+                                >
+                                    settings
+                                </Dialog.Title>
+                                <Settings />
+
                             </div>
                         </Transition.Child>
                     </div>
